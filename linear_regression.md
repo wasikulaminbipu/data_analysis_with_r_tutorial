@@ -168,7 +168,7 @@ str(Data$ColumnName)
 #### Changing Reference Category
 To change reference category following code is required
 ```
-    Data$ColumnName <- relevel(Data$ColumnName, ref= refNo)
+Data$ColumnName <- relevel(Data$ColumnName, ref= refNo)
 ```
 ### Creating New Variables from Old one
 
@@ -241,7 +241,7 @@ print(corData)
 ```
 the data can be rounded by
 ```
-    round(corData,2)
+round(corData,2)
 ```
 #### Step IV: Visualize Correlation
 The correlation can be visualized by the following command
