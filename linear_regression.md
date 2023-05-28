@@ -1,4 +1,4 @@
-# Steps for Statistical Analysis
+# Linear Regression
 ## Steps in Linear Regression
 ### Step I : Histogram
 Code for the histogram
