@@ -17,114 +17,146 @@ Don't forget to `print()` for getting results
 ### Data Conversion & Creating New Variables
 
 Save specific column in a new variable by
-    newData <- data[,"columnName"]
-
+```
+newData <- data[,"columnName"]
+```
 Detect all the categorical data and convert it to `factor()`
-    newData <- as.factor(data[,"colName"])
-
+```
+newData <- as.factor(data[,"colName"])
+```
 
 ### Checking & Summerizing Data
 
 ### For Categorical Data
 
 Create Table for all the factor type data
-    t <- table(newColData)
-
+```
+t <- table(newColData)
+```
 
 For including all the null variables
-    t <- table(newColData, exclude= NULL)
-
+```
+t <- table(newColData, exclude= NULL)
+```
 Get the summary with the table through
-    addmargins(t)
-
+```
+addmargins(t)
+```
 Get Proportion or Percentage of the data by
-    prop.table(t)
-
+```
+prop.table(t)
+```
 Make it round
-    round(prop.table(t), digits= 3)
-
+```
+round(prop.table(t), digits= 3)
+```
 Get in percentage format
-    round(100 * prop.table(t), digits = 3)
-
+```
+round(100 * prop.table(t), digits = 3)
+```
 ### For Continuous Data
 
 Summerize the data
-    summary(colData)
-
+```
+summary(colData)
+```
 Kernel Density Plot
-    d <- density(Data1)
-    plot(d, main="")
-
+```
+d <- density(Data1)
+plot(d, main="")
+```
 ## Step III : Analyzing Data
 
 ### Cross Tabulation
 For cross tabulation following code is needed
-    table(colData,rowData, exclude=NULL)
-
+```
+table(colData,rowData, exclude=NULL)
+```
 Cross tabulation percentage
-    round(100 * prop.table(tableData), digits = 2)
-
+```
+round(100 * prop.table(tableData), digits = 2)
+```
 Though there is a problem with this. It creates a percentage based on all the data of table. If you want percentage based on column or row you must include `margin` in your code. Here is example
-    round(100 * prop.table(tableData, margin = 1), digits = 2)
-
+```
+round(100 * prop.table(tableData, margin = 1), digits = 2)
+```
 margin = 1 means proportion by row
 margin = 2 means proportion by column
 margin = NULL means proportion through full table
 
 ### Calculating Log Odds
 First create cross tabulation
-    a_by_b <- table(b,a)
+```
+a_by_b <- table(b,a)
+```
 Then, get table proportion
-    prop_a_by_b <- prop.table(a_by_b, margin=1)
+```
+prop_a_by_b <- prop.table(a_by_b, margin=1)
+```
 Next, calculate odds
-    odds_data <- prop_a_by_b[,"yes"]/prop_a_by_b[,"no"]
+```
+odds_data <- prop_a_by_b[,"yes"]/prop_a_by_b[,"no"]
+```
 Finally, calculate log odds
-    log_odds_data <- log(odds_data)
-
+```
+log_odds_data <- log(odds_data)
+```
 ### Generating Dot Chart
 To generate dotchart we need following command
-    dotchart(log_odds_data)
-
+```
+dotchart(log_odds_data)
+```
 ### Generating Plot Chart
 To generate plot chart we need following command
-    plot(as.factor(names(log_odds_data)), log_odds_data)
-
+```
+plot(as.factor(names(log_odds_data)), log_odds_data)
+```
 ## Step IV : Checking if data is suitable
 
 ### Cross Tabulation of the data
 Cross Tabulation of the selected data can be done by the following
-    t <- table(Data1,Data2)
-
+```
+t <- table(Data1,Data2)
+```
 ### Checking the proportion of the data
 To check the proportion of the data in the table 
-    pt <- prop.table(t,margin = 1)
+```
+pt <- prop.table(t,margin = 1)
+```
 
 ### Calculating Odds
 To calculate odds in R manually, you can run
-    odds <- pt[, "Col1Name" ]/pt[, "Col2Name"]
-
+```
+odds <- pt[, "Col1Name" ]/pt[, "Col2Name"]
+```
 ### Calculating Log Odds
 To calculate log(odds) you can run the following command
-    log_odds <- log(odds)
-
+```
+log_odds <- log(odds)
+```
 ### Creating Dot Chart
 To generate dot chart we need the following command
-    dotchart(log_odds)
+```
+dotchart(log_odds)
+```
 
 ### Ploting the data
 To create a plot of the data. You can run
-    plot(rownames(pt),log_odds)
-
+```
+plot(rownames(pt),log_odds)
+```
 ## Step V : Creating Logistic Regression Model
 
 You can run logistic regression in R by following code
-    regression <- glm(Data1~Data2, family = binomial(link = "logit"))
-
+```
+regression <- glm(Data1~Data2, family = binomial(link = "logit"))
+```
 Here glm means Generalized Linear Model
 
 You can check if the data is interpret in correct way by tabulating data
-    table(regression$y)
-
+```
+table(regression$y)
+```
 ### Interpretation of the Result
 1. Call of the Algoridm
 2. Deviance Residuals
@@ -140,11 +172,12 @@ Generally we try to compare it with null deviance. How much improvement has been
 
 ### R squared measures
 McFaddens R squared test can be done by 
-    full_model <- glm(outcome~predictor1+predictor2+predictor3, family = binomial(link = logit))
-    null_model <- glm(outcome~1, family = binomial(link = logit))
-    R2 <- 1 - logLik(full_model)/logLik(null_model)
-    print(R2)
-
+```
+full_model <- glm(outcome~predictor1+predictor2+predictor3, family = binomial(link = logit))
+null_model <- glm(outcome~1, family = binomial(link = logit))
+R2 <- 1 - logLik(full_model)/logLik(null_model)
+print(R2)
+```
 Here logLik means Log Likelihood which defines how well the data is fitted.
 
 #### Measurements of R-Squared measures
@@ -152,10 +185,11 @@ value can be 0 to 1 where 0 indicates more predictive power and 1 indicates high
 
 ### C statistic measures
 For C statistic DescTools package is required. After installing DescTools run the following command to generate C-Statistic
-    require(DescTools)
-    full_model <- glm(outcome~predictor1+predictor2+predictor3, family = binomial(link=logit))
-    Cstat(full_model)
-
+```
+require(DescTools)
+full_model <- glm(outcome~predictor1+predictor2+predictor3, family = binomial(link=logit))
+Cstat(full_model)
+```
 #### Measurements of C-Statistics
 C-Statistics can be meased by the value it provides. 0.5 value is considered random and chance of 50% whereas more than 0.5 value defines more discrimination and more fit.
 
@@ -168,35 +202,42 @@ A positive deviance residual indicates that the observed outcome was greater tha
 ### Calibration : Hosmer-Lemeshow statistic and test
 #### Method 1
 ResourceSelection package is required for this test. After installing the package test can be performed by
-    require("ResourceSelection")
-    full_model <- glm(outcome~predictor1+predictor2+predictor3, family = binomial(link=logit))
-    HL <- hoslem.test(x=full_model$y, y = fitted(full_model), g = 10)
-    print(HL)
-
+```
+require("ResourceSelection")
+full_model <- glm(outcome~predictor1+predictor2+predictor3, family = binomial(link=logit))
+HL <- hoslem.test(x=full_model$y, y = fitted(full_model), g = 10)
+print(HL)
+```
 Here, full_model$y = outcome variable, fitted(full_model) = predicted or estimated value and g = amount in every steps
 
 Plot can be drawn from this value also by the following code
-    plot(HL$observed[,"y1"], HL$expected[,"yhat1"])
+```
+plot(HL$observed[,"y1"], HL$expected[,"yhat1"])
+```
 Here, yhat = predicted or estimated value for dependent variable and y =  dependent variable
 Note that this plot is for step1 only. model of other steps can be drawn by similar way
 
 Plot for noncases can be drawn by y0 and yhat0 value in the same way
 
 plot observed vs. expected prevalence for each of the 10 groups can be done by
-    plot(x = HL$observed[,"y1"]/(HL$observed[,"y1"] + HL$observed[,"y0"]), y = HL$expected[,"yhat1"] / (HL$expected[,"yhat1"] + HL$expected[,"yhat0"]))
-
+```
+plot(x = HL$observed[,"y1"]/(HL$observed[,"y1"] + HL$observed[,"y0"]), y = HL$expected[,"yhat1"] / (HL$expected[,"yhat1"] + HL$expected[,"yhat0"]))
+```
 #### Method 2
 In method 2 generalhoslem package is required. After installing package following code should be run
-    require("generalhoslem)
-    full_model <- glm(outcome~predictor1+predictor2+predictor3, family = binomial(link=logit))
-    HL <- logitgof(obs = full_model$y, exp=fitted(fullmodel), g = 10)
-    print(HL)
-
+```
+require("generalhoslem)
+full_model <- glm(outcome~predictor1+predictor2+predictor3, family = binomial(link=logit))
+HL <- logitgof(obs = full_model$y, exp=fitted(fullmodel), g = 10)
+print(HL)
+```
 Here obs = observed, exp= expected
 
 ### Analyze Deviance
 Deviance parameters can be analyzed by chi squared test. Code is written below
-    anova(full_model, test="Chisq")
+```
+anova(full_model, test="Chisq")
+```
 #### Interpretation
 In the result 
 1. df= degrees of freedom : it shows which variables took how much degrees of freedom; 
