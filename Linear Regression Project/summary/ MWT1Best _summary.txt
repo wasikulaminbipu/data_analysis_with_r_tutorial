@@ -1,0 +1,2 @@
+   Min. 1st Qu.  Median    Mean 3rd Qu.    Max.    NA's 
+  120.0   303.8   420.0   399.1   465.2   699.0       1 
