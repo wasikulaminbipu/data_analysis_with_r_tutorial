@@ -29,3 +29,12 @@ survdiff(SurvFunction~Separator, rho = 1)
 ```
 
 Here `rho` is correlation coefficient of two groups being compared.
+
+## Cox Model (Cox Proportional Hazard Model)
+Cox Model is most important model for survival analysis. It also requires `survival` package. After installing the package, type the following code to create cox model
+```
+require('survival')
+cox_model <- coxph(Surv(time,status)~separator, data=Data) #takes from data directly
+summary(cox_model)
+```
+
