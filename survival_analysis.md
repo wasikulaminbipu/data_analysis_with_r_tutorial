@@ -18,6 +18,21 @@ There are several Types of survival analysis. Some of them are described here...
 
 ## Fixing issues with variables
 Fixing issues for different variables can be done by different methods. You must decide which is best suited.
+1. Grouping Data in categories: 
+2. Combining Different groups: Combining less important group or group with lower frequency of data can be combined with groups that is related to that group.
+    ```
+    variable[condition] <- newValue or category
+    ```
+3. Exclude some data
+    ```
+    variable[condition] <- NA
+    ```
+4. Exclude offending variable
+    
+5. Change Reference Category: You can change the reference category by the following code
+    ```
+    relevel(variable,ref="newRefNameOrNo")
+    ```
 
 ## Kaplan Meteor Plot (KM Plot)
 Survival Package is required for survival analysis as it is not available with default R. After installing the package. Type the following code
@@ -56,4 +71,12 @@ require('survival')
 cox_model <- coxph(Surv(time,status)~separator, data=Data) #takes from data directly
 summary(cox_model)
 ```
+Cox model with multible separator can be created by the following code
+```
+require('survival')
+cox_model <- coxph(Surv(time,status)~separator1+separator2+..., data=Data) #takes from data directly
+summary(cox_model)
+```
+
+
 
