@@ -1,5 +1,24 @@
 # Survival Analysis Tutorial
 There are several Types of survival analysis. Some of them are described here...
+## Preparing Data for analysis
+1. To prepare data for survival analysis, several test should be done. At first we must see whats in the data sheet by following code
+    ```
+    view(data)
+    ```
+2. Then check each variable by `summary` (for continuous variables) or `table` (for categorical variables) function.
+3. Check the proportion of data in each category (for categorical variables only) by following code
+    ```
+    round(100*prop.table(variable), digits=2)
+    ```
+4. Checking relation of categorical data through cross tabulation by the following code
+    ```
+    round(100*prop.table(variable,death), digits=2)
+    ```
+5. Test correlation between different variables
+
+## Fixing issues with variables
+Fixing issues for different variables can be done by different methods. You must decide which is best suited.
+
 ## Kaplan Meteor Plot (KM Plot)
 Survival Package is required for survival analysis as it is not available with default R. After installing the package. Type the following code
 ```
